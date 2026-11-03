@@ -42,7 +42,7 @@
 | M00.F02 | 租户成员 | tenant-scoped 成员 CRUD + 邀请/状态消费面（S-T3 已落地） | 开发中 |
 | M00.F03 | 租户角色 | 角色 CRUD 消费面（S-T4 已落地） | 开发中 |
 | M00.F04 | 角色权限 | 菜单授权消费面（S-T4 已落地；I01 权限矩阵绑定已废弃不消费） | 开发中 |
-| M00.F05 | 租户应用 | 租户应用订阅消费面（S-T5） | 规划 |
+| M00.F05 | 租户应用 | 租户应用订阅消费面（S-T5 已落地） | 开发中 |
 
 ### M00.F01 租户维护
 
@@ -97,7 +97,18 @@
 
 （M00.F04.I01 权限矩阵绑定已废弃，RN 侧不登记消费——shared deprecated-items §1。）
 
-（I 级子项随各切片实现走 mirror 提案登记——REQ-2026-036 S-T5 起逐面补。）
+### M00.F05 租户应用
+
+> 镜像 shared BASE `/tenants/{tenantId}/applications` 消费面（REQ-2026-036 S-T5）。
+
+| 子项 ID | 名称 | 类型 | 交付 | 说明 | 状态 |
+|---|---|---|---|---|---|
+| M00.F05.I01 | 列出租户应用（React Native 消费面） | 接口 | 前端+后端 | `tenantApplicationsListTenantApplications` 消费；0 基分页 + 行视图派生 + 无租户上下文 fail-fast。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
+| M00.F05.I02 | 订阅应用（React Native 消费面） | 接口 | 前端+后端 | `tenantApplicationsSubscribeTenantApplication` 消费；装配 fail-fast（clientId 必填）+ 409 分流。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
+| M00.F05.I03 | 更新应用订阅（React Native 消费面） | 接口 | 前端+后端 | `tenantApplicationsUpdateTenantApplication` 消费；status 必填 number + 回读。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
+| M00.F05.I04 | 移除应用订阅（React Native 消费面） | 接口 | 前端+后端 | `tenantApplicationsRemoveTenantApplication` 消费；204→undefined + 404 分流。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
+
+（I 级子项随各切片实现走 mirror 提案登记——REQ-2026-036 后续切片起逐面补。）
 
 ---
 
@@ -135,9 +146,22 @@
 
 | 功能 ID | 功能名称 | 说明 | 状态 |
 |---|---|---|---|
-| M04.F04 | 菜单管理 | 菜单 CRUD/结构/当前用户菜单消费面（S-T5） | 规划 |
+| M04.F04 | 菜单管理 | 菜单 CRUD/结构/当前用户菜单消费面（S-T5 已落地） | 开发中 |
 
-（M04.F01-F03 应用/启停/OAuth 面不在 REQ-2026-036 范围，不登记；I 级子项随 S-T5 切片 mirror 提案登记。）
+### M04.F04 菜单管理
+
+> 镜像 shared BASE `/clients/{clientId}/menus` + `/me/menus` 消费面（REQ-2026-036 S-T5）。
+
+| 子项 ID | 名称 | 类型 | 交付 | 说明 | 状态 |
+|---|---|---|---|---|---|
+| M04.F04.I01 | 菜单列表（React Native 消费面） | 接口 | 前端+后端 | `clientMenusListSysMenus` 消费；数组非分页 + 行视图派生。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
+| M04.F04.I02 | 创建菜单（React Native 消费面） | 接口 | 前端+后端 | `clientMenusCreateSysMenu` 消费；装配 fail-fast（title 1-64/type 三态）+ 409 分流。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
+| M04.F04.I03 | 菜单详情（React Native 消费面） | 接口 | 前端+后端 | `clientMenusGetSysMenu` 消费；404 无此菜单分流。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
+| M04.F04.I04 | 更新菜单（React Native 消费面） | 接口 | 前端+后端 | `clientMenusUpdateSysMenu` 消费；部分载荷装配（不动父子结构）。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
+| M04.F04.I05 | 删除菜单（React Native 消费面） | 接口 | 前端+后端 | `clientMenusDeleteSysMenu` 消费；204→undefined + 409 MENU_HAS_CHILDREN 分流。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
+| M04.F04.I06 | 同级排序（React Native 消费面） | 接口 | 前端+后端 | `clientMenusReorderSysMenus` 消费；PUT `{orderedMenuIds}` + 回读全列表。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
+| M04.F04.I07 | 切换父级（React Native 消费面） | 接口 | 前端+后端 | `clientMenusMoveSysMenu` 消费；PATCH `{parentId}` + 回读菜单。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
+| M04.F04.I08 | 当前用户有效菜单（React Native 消费面） | 查询 | 前端+后端 | `meGetMyMenus` 消费；按 clientId 键记录 + 标题拍平渲染。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
 
 ---
 
