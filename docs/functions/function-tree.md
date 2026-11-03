@@ -40,8 +40,8 @@
 |---|---|---|---|
 | M00.F01 | 租户维护 | 平台 admin 范围租户管理消费面（S-T2 已落地） | 开发中 |
 | M00.F02 | 租户成员 | tenant-scoped 成员 CRUD + 邀请/状态消费面（S-T3 已落地） | 开发中 |
-| M00.F03 | 租户角色 | 角色 CRUD 消费面（S-T4） | 规划 |
-| M00.F04 | 角色权限 | role↔permission 矩阵 + 角色菜单授权消费面（S-T4） | 规划 |
+| M00.F03 | 租户角色 | 角色 CRUD 消费面（S-T4 已落地） | 开发中 |
+| M00.F04 | 角色权限 | 菜单授权消费面（S-T4 已落地；I01 权限矩阵绑定已废弃不消费） | 开发中 |
 | M00.F05 | 租户应用 | 租户应用订阅消费面（S-T5） | 规划 |
 
 ### M00.F01 租户维护
@@ -72,7 +72,32 @@
 
 （M00.F02.I07 接受邀请 BASE 侧规划中无生成端点——REQ-2026-036 S-T3 不含，随 BASE 落地后另片登记。）
 
-（I 级子项随各切片实现走 mirror 提案登记——REQ-2026-036 S-T4 起逐面补。）
+### M00.F03 租户角色
+
+> 镜像 shared BASE `/tenants/{tenantId}/roles` 消费面（REQ-2026-036 S-T4；作用域=租户×client）。
+
+| 子项 ID | 名称 | 类型 | 交付 | 说明 | 状态 |
+|---|---|---|---|---|---|
+| M00.F03.I01 | 角色列表（React Native 消费面） | 接口 | 前端+后端 | `tenantRolesListSysRoles` 消费；0 基分页 + 行视图派生 + 无租户上下文 fail-fast。测试锚 `tests/tenant-role.test.ts` | 开发中 |
+| M00.F03.I02 | 创建角色（React Native 消费面） | 接口 | 前端+后端 | `tenantRolesCreateSysRole` 消费；装配 fail-fast（code/name 1-64，clientId 必填）+ 409 分流。测试锚 `tests/tenant-role.test.ts` | 开发中 |
+| M00.F03.I03 | 角色详情（React Native 消费面） | 接口 | 前端+后端 | `tenantRolesGetSysRole` 消费；404 无此角色分流。测试锚 `tests/tenant-role.test.ts` | 开发中 |
+| M00.F03.I04 | 更新角色（React Native 消费面） | 接口 | 前端+后端 | `tenantRolesUpdateSysRole` 消费；roleName/description 部分载荷装配。测试锚 `tests/tenant-role.test.ts` | 开发中 |
+| M00.F03.I05 | 删除角色（React Native 消费面） | 接口 | 前端+后端 | `tenantRolesDeleteSysRole` 消费；204→undefined + 409 ROLE_IN_USE 分流。测试锚 `tests/tenant-role.test.ts` | 开发中 |
+
+### M00.F04 角色权限
+
+> 镜像 shared BASE `/tenants/{tenantId}/roles/{roleId}/menus` 消费面（REQ-2026-036 S-T4）。
+> I01 权限矩阵绑定已废弃（shared deprecated-items §1），RN 侧不消费。
+
+| 子项 ID | 名称 | 类型 | 交付 | 说明 | 状态 |
+|---|---|---|---|---|---|
+| M00.F04.I02 | 角色已授权菜单查询（React Native 消费面） | 接口 | 前端+后端 | `tenantRoleMenusListSysRoleMenus` 消费；UI 勾选回显 grant 形状。测试锚 `tests/tenant-role.test.ts` | 开发中 |
+| M00.F04.I03 | 整批设置角色菜单（React Native 消费面） | 接口 | 前端+后端 | `tenantRoleMenusSetSysRoleMenus` 消费；PUT 全量替换 `{menuIds}` + 回读 grant。测试锚 `tests/tenant-role.test.ts` | 开发中 |
+| M00.F04.I04 | 清空角色菜单（React Native 消费面） | 接口 | 前端+后端 | `tenantRoleMenusClearSysRoleMenus` 消费；DELETE 204→undefined。测试锚 `tests/tenant-role.test.ts` | 开发中 |
+
+（M00.F04.I01 权限矩阵绑定已废弃，RN 侧不登记消费——shared deprecated-items §1。）
+
+（I 级子项随各切片实现走 mirror 提案登记——REQ-2026-036 S-T5 起逐面补。）
 
 ---
 

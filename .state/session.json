@@ -1,13 +1,14 @@
 {
   "schema": 1,
   "project": "saas-identity-platform RN 侧业务面",
-  "current_task": "REQ-2026-036 RN admin 消费面——S-T3 租户成员页收官，下一片 S-T4 租户角色/角色权限",
+  "current_task": "REQ-2026-036 RN admin 消费面——S-T4 租户角色/角色权限页收官，下一片 S-T5 租户应用+菜单",
   "done": [
     "S-T1（e77acb4）：身份卡/租户列表/切租户视图模型 3 测试锚 + context-screen 承接件；M00/M04 模块行与 M00.F01-F05/M04.F04 功能行镜像登记；gate 全绿",
     "S-T2（46ad1a8）：tenant-admin 五 op 服务编排 + 视图派生 5 测试锚全 trace；M00.F01.I01-I05 登记；gate 22 条目全绿",
-    "S-T3（本批）：tenant-member 七 op 服务编排 + 视图派生 7 测试锚全 trace（M00.F02.I01-I06/I08）；create 返回 TenantMemberUserView、invite 返回 TenantMemberView（侦察时曾对调，tsc 纠偏）；tenantId 取会话 currentTenantId 缺则 fail-fast；gate L0-L5 全绿 29 条目；红灯证据链闭环（red.json 10:36）；I07 接受邀请 BASE 无端点不在本片"
+    "S-T3（6fe4a50）：tenant-member 七 op 7 测试锚全 trace（M00.F02.I01-I06/I08）；gate 29 条目全绿；I07 BASE 无端点不在本片",
+    "S-T4（本批）：tenant-role 八 op 服务编排（角色五 op + 菜单授权三 op）+ 视图派生 8 测试锚全 trace（M00.F03.I01-I05 / M00.F04.I02-I04）；F04.I01 权限矩阵绑定已废弃不消费；gate L0-L5 全绿 37 条目；红灯证据链闭环（red.json 11:19）"
   ],
-  "next": "REQ-2026-036 S-T4 租户角色 + 角色权限消费面（M00.F03/F04）——先读 shared BASE M00.F03/F04 与生成端点 tenant-roles / tenant-role-menus 形状（data 类型逐 op 核，勿按相邻 op 推），照配方 red-first→服务+视图→gate 全绿→mirror 登记",
+  "next": "REQ-2026-036 S-T5 租户应用订阅 + 菜单管理消费面（M00.F05 / M04.F04）——先读 shared BASE 两面行与生成端点 tenant-applications / admin-clients / sys-menus 形状（data 类型逐 op 核），照配方 red-first→服务+视图→gate 全绿→mirror 登记；随后 S-T6 收尾（REQ 验收注记 + App 宿主接线挂账核对）",
   "ops_notes": [
     "测试桩配方照 tests/tenant-member.test.ts；user 字面量须 as const（SysUserStatus 字面量类型）",
     "生成契约 data 类型逐 op 核（create→TenantMemberUserView / invite→TenantMemberView，相邻 op 会骗人）",
