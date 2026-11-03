@@ -5,7 +5,7 @@
 | 提出人 | zcqiand |
 | 提出日期 | 2026-11-02 |
 | 优先级 | P1 |
-| 状态 | 已立项待开工 |
+| 状态 | 开发中（S-T1-T6 消费面代码交付完成 2026-11-03，GA 翻转待人工验收） |
 | 关联 ADR | — |
 | 先例 | REQ-2026-032（本仓登录链首片）/ saas miniprogram knife2-knife4 配方（登录链→admin 五页→OAuth+菜单）/ REQ-2026-029（saas-angular full-feature-sync） |
 
@@ -38,23 +38,34 @@
 | AC-3 | metro bundle 门 | L4.5 构建 | ✅ bundle 产物落 `_work/` 成功（零 Android SDK 依赖） |
 | AC-4 | 镜像树 | 逐域 mirror 登记（免批通道 ADR-0042） | ✅ 交付 I 项状态翻转有据；无悬空引用（L5） |
 
+### 2.1 交付态核对（S-T6，2026-11-03）
+
+| AC | 达成情况 |
+|---|---|
+| AC-1 | ✅ 37 fn ID 全 trace（47 测试），gate L0-L5 全绿 49 条目；无 skip 挂 ID |
+| AC-2 | ◐ 页面以 **service+view 分层 + jest 断言**交付（无设备依赖）；S-T1 另有 screen 组件（`src/features/identity/context-screen.tsx`）。**RN renderer 组件级交互断言与 S-T2-T5 screen 组件随 native 工程面另片**（REQ §1 分叉面 1/4 既定挂账）——jest 断言位=视图派生纯函数（列表分页/过滤/装配语义与 saas-react 同款已核） |
+| AC-3 | ✅ L4.5 metro bundle 门绿（产物落 `_work/`，零 Android SDK 依赖） |
+| AC-4 | ✅ 35 I 项 mirror 免批登记（S-T1-T5 六批提案），L5 无悬空引用 |
+
+**宿主接线挂账确认**：`App.tsx` 维持 Phase 0 零业务骨架；context-screen 数据接线（App 持 auth-service 装配）随 native 工程面批挂账——本单 AC 不含设备依赖，不受影响。
+
 ## 3. 任务拆解
 
 | 任务 ID | 任务描述 | 类型 | 负责人 | 预估 | 状态 |
 |---|---|---|---|---|---|
-| S-T1 | 会话/租户上下文页（M01.F01/F03 消费面 UI 化：身份卡 + 租户列表 + 切租户——登录链 5 ID 的页面承接） | 开发 | Claude | — | 待开始 |
-| S-T2 | M00.F01 租户维护页（admin 列表/创建/详情/更新，platform admin 范围） | 开发 | Claude | — | 待开始 |
-| S-T3 | M00.F02 租户成员页（CRUD + 邀请/接受/状态流） | 开发 | Claude | — | 待开始 |
-| S-T4 | M00.F03 租户角色页 + M00.F04 角色权限矩阵页（role↔permission + 角色菜单授权） | 开发 | Claude | — | 待开始 |
-| S-T5 | M00.F05 租户应用页 + M04.F04 菜单管理消费页（菜单树只读+维护面） | 开发 | Claude | — | 待开始 |
-| S-T6 | 收官：mirror 推进（GA 翻转）+ route/trace 全绿 + handoff | 收口 | Claude | — | 待开始 |
+| S-T1 | 会话/租户上下文页（M01.F01/F03 消费面 UI 化：身份卡 + 租户列表 + 切租户——登录链 5 ID 的页面承接） | 开发 | Claude | — | ✅ 已完成（e77acb4，含 context-screen 组件） |
+| S-T2 | M00.F01 租户维护页（admin 列表/创建/详情/更新，platform admin 范围） | 开发 | Claude | — | ✅ 已完成（46ad1a8，service+view 5 锚） |
+| S-T3 | M00.F02 租户成员页（CRUD + 邀请/接受/状态流；I07 接受邀请 BASE 无端点不含） | 开发 | Claude | — | ✅ 已完成（6fe4a50，service+view 7 锚） |
+| S-T4 | M00.F03 租户角色页 + M00.F04 角色权限矩阵页（role↔permission + 角色菜单授权；F04.I01 已废弃不消费） | 开发 | Claude | — | ✅ 已完成（f7f904f，service+view 8 锚） |
+| S-T5 | M00.F05 租户应用页 + M04.F04 菜单管理消费页（菜单树只读+维护面） | 开发 | Claude | — | ✅ 已完成（3308a89，service+view 12 锚） |
+| S-T6 | 收官：mirror 推进（GA 翻转）+ route/trace 全绿 + handoff | 收口 | Claude | — | ✅ 代码面完成（2026-11-03，REQ 勾销+AC 核对 §2.1）；**GA 翻转待人工验收后另步执行** |
 
 ## 4. 功能影响
 
 | 功能 ID | 功能名称 | 影响类型 | 说明 | 关联任务 |
 |---|---|---|---|---|
-| M00.F01-F05、M04.F04、M01.F01/F03 页面承接 | saas 控制台域 | 新增/变更 | I 级随实现逐段 mirror 登记 | S-T1-S-T6 |
+| M00.F01-F05、M04.F04、M01.F01/F03 页面承接 | saas 控制台域 | 新增/变更 | I 级随实现逐段 mirror 登记（已落 35 I 项，见 §2.1 AC-4） | S-T1-S-T6 |
 
 ## 5. 人工验收记录
 
-（待批交付后填写）
+（待批交付后填写。代码交付摘要 2026-11-03：五片 35 消费 op / 37 fn ID 全 trace / gate L0-L5 全绿 49 条目；分片 commit e77acb4 / 46ad1a8 / 6fe4a50 / f7f904f / 3308a89。验收通过后执行 GA 翻转——M00.F01-F05、M04.F04 及镜像登记 I 项 开发中→已上线。）

@@ -1,19 +1,21 @@
 {
   "schema": 1,
   "project": "saas-identity-platform RN 侧业务面",
-  "current_task": "REQ-2026-036 RN admin 消费面——S-T5 租户应用+菜单管理页收官，下一片 S-T6 收尾",
+  "current_task": "REQ-2026-036 S-T6 收尾完成——REQ 任务表勾销 S-T1-T5（五片 commit 在案）+ AC 交付态核对 §2.1 + 宿主接线挂账确认",
   "done": [
-    "S-T1（e77acb4）：identity 3 锚 + 承接件；M00/M04 模块行镜像登记",
+    "S-T1（e77acb4）：identity 3 锚 + 承接件（含 context-screen.tsx）",
     "S-T2（46ad1a8）：tenant-admin 五 op 5 锚；gate 22 条目",
     "S-T3（6fe4a50）：tenant-member 七 op 7 锚；gate 29 条目；I07 BASE 无端点不在本片",
     "S-T4（f7f904f）：tenant-role 八 op 8 锚；gate 37 条目；F04.I01 已废弃不消费",
-    "S-T5（本批）：app-menu 十二 op 服务编排（应用订阅四 op + 菜单七 op + me/menus 一 op）+ 视图派生 12 测试锚全 trace（M00.F05.I01-I04 / M04.F04.I01-I08）；菜单 list/reorder 返回 SysMenu[] 非分页、me/menus 按 clientId 键记录；gate L0-L5 全绿 49 条目；红灯证据链闭环（red.json 17:15）"
+    "S-T5（3308a89）：app-menu 十二 op 12 锚；gate 49 条目；SysMenu[] 非分页 + me/menus 键记录",
+    "S-T6（本批）：REQ-2026-036 任务表勾销 S-T1-T5 + AC 交付态核对（§2.1：AC-1/3/4 ✅，AC-2 ◐ renderer 断言挂账 native 工程面）+ App.tsx Phase 0 维持挂账确认 + §5 交付摘要",
+    "指纹积累：create 成功态 200 非 201 / data 类型逐 op 核 / tree_change --apply 全层级不插行 / user 字面量须 as const"
   ],
-  "next": "REQ-2026-036 S-T6 收尾：REQ 文档任务表勾销 S-T1-T5 + 验收注记核对（AC 全 Jest 无设备依赖达成情况）；App 宿主接线（App.tsx）确认维持 native 工程面批挂账；剩余 M01 页面承接注记核对；然后转 REQ-2026-037 lab RN（L-T1-T8）",
+  "next": "REQ-2026-036 收官态：代码交付完成待人工验收（GA 翻转待批后另步）；REQ-2026-037 lab RN（L-T1-T8）待启动——先读计划 docs/superpowers/plans/2026-11-02-rn-business-face.md L-T1 行",
   "ops_notes": [
     "测试桩配方照 tests/tenant-member.test.ts；user 字面量须 as const（SysUserStatus 字面量类型）",
     "生成契约 data 类型逐 op 核（create→TenantMemberUserView / invite→TenantMemberView，相邻 op 会骗人）",
-    "生成契约 create 成功态是 200 非 201（窄化才得 Tenant）；错误串形 `code：message` 兜底 fallback",
+    "生成契约 create 成功态是 200 非 201（窄化才得 data）；错误串形 `code：message` 兜底 fallback",
     "tree_change --apply 全层级都不插行（只盖章焚令牌）——插行一律人工执行已批提案",
     "RN 仓 session.json 每片收官必更（S-T1 漏更在案）"
   ]
