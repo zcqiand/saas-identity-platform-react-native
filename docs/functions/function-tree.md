@@ -28,7 +28,23 @@
 
 | 模块 ID | 模块名称 | 说明 | 状态 |
 |---|---|---|---|
+| M00 | 租户管理 | tenant-admin 配置面消费（REQ-2026-036 S-T2-T5；镜像 shared BASE） | 规划 |
 | M01 | 认证与身份 | 登录链消费面（REQ-2026-032 首片；其余域后置） | 开发中 |
+| M04 | 应用管理 | 应用/菜单消费面（REQ-2026-036 S-T5） | 规划 |
+
+---
+
+## M00 租户管理
+
+| 功能 ID | 功能名称 | 说明 | 状态 |
+|---|---|---|---|
+| M00.F01 | 租户维护 | 平台 admin 范围租户管理消费面（S-T2） | 规划 |
+| M00.F02 | 租户成员 | tenant-scoped 成员 CRUD + 邀请/状态消费面（S-T3） | 规划 |
+| M00.F03 | 租户角色 | 角色 CRUD 消费面（S-T4） | 规划 |
+| M00.F04 | 角色权限 | role↔permission 矩阵 + 角色菜单授权消费面（S-T4） | 规划 |
+| M00.F05 | 租户应用 | 租户应用订阅消费面（S-T5） | 规划 |
+
+（I 级子项随各切片实现走 mirror 提案登记——REQ-2026-036 S-T2 起逐面补。）
 
 ---
 
@@ -44,14 +60,14 @@
 
 | 子项 ID | 名称 | 类型 | 交付 | 说明 | 状态 |
 |---|---|---|---|---|---|
-| M01.F01.I01 | 当前用户 whoami（React Native 消费面） | 查询 | 前端+后端 | `meWhoami` 消费；session 建立后身份回填。测试锚 `tests/auth-chain.test.ts` | 开发中 |
+| M01.F01.I01 | 当前用户 whoami（React Native 消费面） | 查询 | 前端+后端 | `meWhoami` 消费；session 建立后身份回填。测试锚 `tests/auth-chain.test.ts`；页面承接=身份卡视图（`src/features/identity/context-view.ts`，REQ-2026-036 S-T1），测试锚 `tests/identity-context.test.ts` | 开发中 |
 
 ### M01.F03 我的租户
 
 | 子项 ID | 名称 | 类型 | 交付 | 说明 | 状态 |
 |---|---|---|---|---|---|
-| M01.F03.I01 | 列出我的租户成员关系（React Native 消费面） | 查询 | 前端+后端 | `meListMyTenants` 消费。测试锚 `tests/auth-chain.test.ts` | 开发中 |
-| M01.F03.I02 | 切换当前租户（React Native 消费面） | 接口 | 前端+后端 | `meSwitchTenant` 消费；更新会话租户上下文。测试锚 `tests/auth-chain.test.ts` | 开发中 |
+| M01.F03.I01 | 列出我的租户成员关系（React Native 消费面） | 查询 | 前端+后端 | `meListMyTenants` 消费。测试锚 `tests/auth-chain.test.ts`；页面承接=租户列表视图（REQ-2026-036 S-T1），测试锚 `tests/identity-context.test.ts` | 开发中 |
+| M01.F03.I02 | 切换当前租户（React Native 消费面） | 接口 | 前端+后端 | `meSwitchTenant` 消费；更新会话租户上下文。测试锚 `tests/auth-chain.test.ts`；页面承接=列表选中态+切租户入口（REQ-2026-036 S-T1），测试锚 `tests/identity-context.test.ts` | 开发中 |
 
 ### M01.F04 认证
 
@@ -59,6 +75,18 @@
 |---|---|---|---|---|---|
 | M01.F04.I01 | 密码登录（React Native 消费面） | 接口 | 前端+后端 | `sessionsLogin` 消费；入参装配校验 fail-fast + 423 Locked 分流。测试锚 `tests/auth-chain.test.ts`、`tests/login-form.test.ts` | 开发中 |
 | M01.F04.I06 | 登出（React Native 消费面） | 接口 | 前端+后端 | `sessionsLogout` 消费；全局登出 + 本地 token/用户/租户全清。测试锚 `tests/auth-chain.test.ts` | 开发中 |
+
+---
+
+## M04 应用管理
+
+| 功能 ID | 功能名称 | 说明 | 状态 |
+|---|---|---|---|
+| M04.F04 | 菜单管理 | 菜单 CRUD/结构/当前用户菜单消费面（S-T5） | 规划 |
+
+（M04.F01-F03 应用/启停/OAuth 面不在 REQ-2026-036 范围，不登记；I 级子项随 S-T5 切片 mirror 提案登记。）
+
+---
 
 （M01.F04.I03 登录页 UI 后置 native 工程面落地后另片登记——REQ-2026-032 §1 范围外。）
 

@@ -19,7 +19,7 @@
 
 1. **无 dev server**：五门全 CLI（L1 prettier / L2 eslint / L3 tsc / L4 jest / L4.5 metro bundle 产物落 `_work/`）；页面验证靠 jest（RN renderer）+ metro bundle 门，无浏览器 live 探针——断言形状照本仓 `tests/login-form.test.ts` 首片配方
 2. **门命令形状**：`npx --no -- <tool>` 分隔（npm 11 假绿事故纪律）；jest trace 标题尾锚适配器（X16 首航配方）
-3. **家族树 ID 不通用**：saas RN 镜像锚 saas shared 树 M00/M01/M04，不照搬 lab-angular/react 的 M02-M06 编号（REQ-2026-033 批在册教训）
+3. **家族树 ID 不通用**：saas RN 镜像锚 saas shared 树，不照搬 lab 家族树业务域编号（REQ-2026-033 批在册教训）；本单消费面按镜像免批通道随片登记进本仓 function-tree.md
 4. **native 工程面不在骨架**（android/ ios/ 文件夹后置）：本批仍为 JS/TS 面交付，真机/dev client 与 APK/IPA 分发维持 Phase 1+ 挂账——AC 不含设备依赖
 5. **契约消费只认生成物**：orval fetch client（hard §4），页面经 mutator 直调家族后端或 mock store——mock 姿态随 saas-react 同款约定
 
