@@ -38,13 +38,25 @@
 
 | 功能 ID | 功能名称 | 说明 | 状态 |
 |---|---|---|---|
-| M00.F01 | 租户维护 | 平台 admin 范围租户管理消费面（S-T2） | 规划 |
+| M00.F01 | 租户维护 | 平台 admin 范围租户管理消费面（S-T2 已落地） | 开发中 |
 | M00.F02 | 租户成员 | tenant-scoped 成员 CRUD + 邀请/状态消费面（S-T3） | 规划 |
 | M00.F03 | 租户角色 | 角色 CRUD 消费面（S-T4） | 规划 |
 | M00.F04 | 角色权限 | role↔permission 矩阵 + 角色菜单授权消费面（S-T4） | 规划 |
 | M00.F05 | 租户应用 | 租户应用订阅消费面（S-T5） | 规划 |
 
-（I 级子项随各切片实现走 mirror 提案登记——REQ-2026-036 S-T2 起逐面补。）
+### M00.F01 租户维护
+
+> 镜像 shared BASE `/admin/tenants`（要求 platform_admin）消费面（REQ-2026-036 S-T2）。
+
+| 子项 ID | 名称 | 类型 | 交付 | 说明 | 状态 |
+|---|---|---|---|---|---|
+| M00.F01.I01 | 租户列表（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsListTenants` 消费；0 基分页 + 行视图派生 + 403 FORBIDDEN 分流。测试锚 `tests/tenant-admin.test.ts` | 开发中 |
+| M00.F01.I02 | 创建租户（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsCreateTenant` 消费；装配 fail-fast（key 2-64 / name 2-128）+ 409 TENANT_EXISTS 分流。测试锚 `tests/tenant-admin.test.ts` | 开发中 |
+| M00.F01.I03 | 租户详情（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsGetTenant` 消费；详情视图派生 + 404 无此租户分流。测试锚 `tests/tenant-admin.test.ts` | 开发中 |
+| M00.F01.I04 | 更新租户（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsUpdateTenant` 消费；部分载荷装配（空载荷禁发）+ 状态翻转文案。测试锚 `tests/tenant-admin.test.ts` | 开发中 |
+| M00.F01.I05 | 删除租户（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsDeleteTenant` 消费；204→undefined + 409 TENANT_HAS_MEMBERS 分流。测试锚 `tests/tenant-admin.test.ts` | 开发中 |
+
+（I 级子项随各切片实现走 mirror 提案登记——REQ-2026-036 S-T3 起逐面补。）
 
 ---
 
