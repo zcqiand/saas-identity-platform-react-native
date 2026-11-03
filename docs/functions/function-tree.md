@@ -39,7 +39,7 @@
 | 功能 ID | 功能名称 | 说明 | 状态 |
 |---|---|---|---|
 | M00.F01 | 租户维护 | 平台 admin 范围租户管理消费面（S-T2 已落地） | 开发中 |
-| M00.F02 | 租户成员 | tenant-scoped 成员 CRUD + 邀请/状态消费面（S-T3） | 规划 |
+| M00.F02 | 租户成员 | tenant-scoped 成员 CRUD + 邀请/状态消费面（S-T3 已落地） | 开发中 |
 | M00.F03 | 租户角色 | 角色 CRUD 消费面（S-T4） | 规划 |
 | M00.F04 | 角色权限 | role↔permission 矩阵 + 角色菜单授权消费面（S-T4） | 规划 |
 | M00.F05 | 租户应用 | 租户应用订阅消费面（S-T5） | 规划 |
@@ -56,7 +56,23 @@
 | M00.F01.I04 | 更新租户（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsUpdateTenant` 消费；部分载荷装配（空载荷禁发）+ 状态翻转文案。测试锚 `tests/tenant-admin.test.ts` | 开发中 |
 | M00.F01.I05 | 删除租户（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsDeleteTenant` 消费；204→undefined + 409 TENANT_HAS_MEMBERS 分流。测试锚 `tests/tenant-admin.test.ts` | 开发中 |
 
-（I 级子项随各切片实现走 mirror 提案登记——REQ-2026-036 S-T3 起逐面补。）
+### M00.F02 租户成员
+
+> 镜像 shared BASE `/tenants/{tenantId}/members` 消费面（REQ-2026-036 S-T3）。
+
+| 子项 ID | 名称 | 类型 | 交付 | 说明 | 状态 |
+|---|---|---|---|---|---|
+| M00.F02.I01 | 成员列表（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersListTenantUsers` 消费；0 基分页 + 行视图派生 + 无租户上下文 fail-fast。测试锚 `tests/tenant-member.test.ts` | 开发中 |
+| M00.F02.I02 | 创建成员（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersCreateTenantUser` 消费；装配 fail-fast（username 1-64 / password 8-256）+ 409 分流。测试锚 `tests/tenant-member.test.ts` | 开发中 |
+| M00.F02.I03 | 成员详情（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersGetTenantUser` 消费；404 无此成员分流。测试锚 `tests/tenant-member.test.ts` | 开发中 |
+| M00.F02.I04 | 更新成员（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersUpdateTenantUser` 消费；email/mobile 部分载荷装配。测试锚 `tests/tenant-member.test.ts` | 开发中 |
+| M00.F02.I05 | 删除成员（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersDeleteTenantUser` 消费；204→undefined + 404 分流。测试锚 `tests/tenant-member.test.ts` | 开发中 |
+| M00.F02.I06 | 邀请成员（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersInviteTenantUser` 消费；email/mobile 至少一项 + 409 ALREADY_MEMBER 分流。测试锚 `tests/tenant-member.test.ts` | 开发中 |
+| M00.F02.I08 | 状态切换（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersChangeTenantUserStatus` 消费；四态文案（启用中/已邀请/已停用/已禁用）。测试锚 `tests/tenant-member.test.ts` | 开发中 |
+
+（M00.F02.I07 接受邀请 BASE 侧规划中无生成端点——REQ-2026-036 S-T3 不含，随 BASE 落地后另片登记。）
+
+（I 级子项随各切片实现走 mirror 提案登记——REQ-2026-036 S-T4 起逐面补。）
 
 ---
 
