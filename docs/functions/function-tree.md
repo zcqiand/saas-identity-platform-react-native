@@ -28,9 +28,9 @@
 
 | 模块 ID | 模块名称 | 说明 | 状态 |
 |---|---|---|---|
-| M00 | 租户管理 | tenant-admin 配置面消费（REQ-2026-036 S-T2-T5；镜像 shared BASE） | 规划 |
-| M01 | 认证与身份 | 登录链消费面（REQ-2026-032 首片；其余域后置） | 开发中 |
-| M04 | 应用管理 | 应用/菜单消费面（REQ-2026-036 S-T5） | 规划 |
+| M00 | 租户管理 | tenant-admin 配置面消费（REQ-2026-036 S-T2-T5；镜像 shared BASE） | 已上线 |
+| M01 | 认证与身份 | 登录链消费面（REQ-2026-032 首片；其余域后置） | 已上线 |
+| M04 | 应用管理 | 应用/菜单消费面（REQ-2026-036 S-T5） | 已上线 |
 
 ---
 
@@ -38,11 +38,11 @@
 
 | 功能 ID | 功能名称 | 说明 | 状态 |
 |---|---|---|---|
-| M00.F01 | 租户维护 | 平台 admin 范围租户管理消费面（S-T2 已落地） | 开发中 |
-| M00.F02 | 租户成员 | tenant-scoped 成员 CRUD + 邀请/状态消费面（S-T3 已落地） | 开发中 |
-| M00.F03 | 租户角色 | 角色 CRUD 消费面（S-T4 已落地） | 开发中 |
-| M00.F04 | 角色权限 | 菜单授权消费面（S-T4 已落地；I01 权限矩阵绑定已废弃不消费） | 开发中 |
-| M00.F05 | 租户应用 | 租户应用订阅消费面（S-T5 已落地） | 开发中 |
+| M00.F01 | 租户维护 | 平台 admin 范围租户管理消费面（S-T2 已落地） | 已上线 |
+| M00.F02 | 租户成员 | tenant-scoped 成员 CRUD + 邀请/状态消费面（S-T3 已落地） | 已上线 |
+| M00.F03 | 租户角色 | 角色 CRUD 消费面（S-T4 已落地） | 已上线 |
+| M00.F04 | 角色权限 | 菜单授权消费面（S-T4 已落地；I01 权限矩阵绑定已废弃不消费） | 已上线 |
+| M00.F05 | 租户应用 | 租户应用订阅消费面（S-T5 已落地） | 已上线 |
 
 ### M00.F01 租户维护
 
@@ -50,11 +50,11 @@
 
 | 子项 ID | 名称 | 类型 | 交付 | 说明 | 状态 |
 |---|---|---|---|---|---|
-| M00.F01.I01 | 租户列表（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsListTenants` 消费；0 基分页 + 行视图派生 + 403 FORBIDDEN 分流。测试锚 `tests/tenant-admin.test.ts` | 开发中 |
-| M00.F01.I02 | 创建租户（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsCreateTenant` 消费；装配 fail-fast（key 2-64 / name 2-128）+ 409 TENANT_EXISTS 分流。测试锚 `tests/tenant-admin.test.ts` | 开发中 |
-| M00.F01.I03 | 租户详情（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsGetTenant` 消费；详情视图派生 + 404 无此租户分流。测试锚 `tests/tenant-admin.test.ts` | 开发中 |
-| M00.F01.I04 | 更新租户（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsUpdateTenant` 消费；部分载荷装配（空载荷禁发）+ 状态翻转文案。测试锚 `tests/tenant-admin.test.ts` | 开发中 |
-| M00.F01.I05 | 删除租户（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsDeleteTenant` 消费；204→undefined + 409 TENANT_HAS_MEMBERS 分流。测试锚 `tests/tenant-admin.test.ts` | 开发中 |
+| M00.F01.I01 | 租户列表（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsListTenants` 消费；0 基分页 + 行视图派生 + 403 FORBIDDEN 分流。测试锚 `tests/tenant-admin.test.ts` | 已上线 |
+| M00.F01.I02 | 创建租户（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsCreateTenant` 消费；装配 fail-fast（key 2-64 / name 2-128）+ 409 TENANT_EXISTS 分流。测试锚 `tests/tenant-admin.test.ts` | 已上线 |
+| M00.F01.I03 | 租户详情（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsGetTenant` 消费；详情视图派生 + 404 无此租户分流。测试锚 `tests/tenant-admin.test.ts` | 已上线 |
+| M00.F01.I04 | 更新租户（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsUpdateTenant` 消费；部分载荷装配（空载荷禁发）+ 状态翻转文案。测试锚 `tests/tenant-admin.test.ts` | 已上线 |
+| M00.F01.I05 | 删除租户（React Native 消费面） | 接口 | 前端+后端 | `adminTenantsDeleteTenant` 消费；204→undefined + 409 TENANT_HAS_MEMBERS 分流。测试锚 `tests/tenant-admin.test.ts` | 已上线 |
 
 ### M00.F02 租户成员
 
@@ -62,13 +62,13 @@
 
 | 子项 ID | 名称 | 类型 | 交付 | 说明 | 状态 |
 |---|---|---|---|---|---|
-| M00.F02.I01 | 成员列表（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersListTenantUsers` 消费；0 基分页 + 行视图派生 + 无租户上下文 fail-fast。测试锚 `tests/tenant-member.test.ts` | 开发中 |
-| M00.F02.I02 | 创建成员（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersCreateTenantUser` 消费；装配 fail-fast（username 1-64 / password 8-256）+ 409 分流。测试锚 `tests/tenant-member.test.ts` | 开发中 |
-| M00.F02.I03 | 成员详情（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersGetTenantUser` 消费；404 无此成员分流。测试锚 `tests/tenant-member.test.ts` | 开发中 |
-| M00.F02.I04 | 更新成员（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersUpdateTenantUser` 消费；email/mobile 部分载荷装配。测试锚 `tests/tenant-member.test.ts` | 开发中 |
-| M00.F02.I05 | 删除成员（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersDeleteTenantUser` 消费；204→undefined + 404 分流。测试锚 `tests/tenant-member.test.ts` | 开发中 |
-| M00.F02.I06 | 邀请成员（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersInviteTenantUser` 消费；email/mobile 至少一项 + 409 ALREADY_MEMBER 分流。测试锚 `tests/tenant-member.test.ts` | 开发中 |
-| M00.F02.I08 | 状态切换（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersChangeTenantUserStatus` 消费；四态文案（启用中/已邀请/已停用/已禁用）。测试锚 `tests/tenant-member.test.ts` | 开发中 |
+| M00.F02.I01 | 成员列表（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersListTenantUsers` 消费；0 基分页 + 行视图派生 + 无租户上下文 fail-fast。测试锚 `tests/tenant-member.test.ts` | 已上线 |
+| M00.F02.I02 | 创建成员（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersCreateTenantUser` 消费；装配 fail-fast（username 1-64 / password 8-256）+ 409 分流。测试锚 `tests/tenant-member.test.ts` | 已上线 |
+| M00.F02.I03 | 成员详情（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersGetTenantUser` 消费；404 无此成员分流。测试锚 `tests/tenant-member.test.ts` | 已上线 |
+| M00.F02.I04 | 更新成员（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersUpdateTenantUser` 消费；email/mobile 部分载荷装配。测试锚 `tests/tenant-member.test.ts` | 已上线 |
+| M00.F02.I05 | 删除成员（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersDeleteTenantUser` 消费；204→undefined + 404 分流。测试锚 `tests/tenant-member.test.ts` | 已上线 |
+| M00.F02.I06 | 邀请成员（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersInviteTenantUser` 消费；email/mobile 至少一项 + 409 ALREADY_MEMBER 分流。测试锚 `tests/tenant-member.test.ts` | 已上线 |
+| M00.F02.I08 | 状态切换（React Native 消费面） | 接口 | 前端+后端 | `tenantMembersChangeTenantUserStatus` 消费；四态文案（启用中/已邀请/已停用/已禁用）。测试锚 `tests/tenant-member.test.ts` | 已上线 |
 
 （M00.F02.I07 接受邀请 BASE 侧规划中无生成端点——REQ-2026-036 S-T3 不含，随 BASE 落地后另片登记。）
 
@@ -78,11 +78,11 @@
 
 | 子项 ID | 名称 | 类型 | 交付 | 说明 | 状态 |
 |---|---|---|---|---|---|
-| M00.F03.I01 | 角色列表（React Native 消费面） | 接口 | 前端+后端 | `tenantRolesListSysRoles` 消费；0 基分页 + 行视图派生 + 无租户上下文 fail-fast。测试锚 `tests/tenant-role.test.ts` | 开发中 |
-| M00.F03.I02 | 创建角色（React Native 消费面） | 接口 | 前端+后端 | `tenantRolesCreateSysRole` 消费；装配 fail-fast（code/name 1-64，clientId 必填）+ 409 分流。测试锚 `tests/tenant-role.test.ts` | 开发中 |
-| M00.F03.I03 | 角色详情（React Native 消费面） | 接口 | 前端+后端 | `tenantRolesGetSysRole` 消费；404 无此角色分流。测试锚 `tests/tenant-role.test.ts` | 开发中 |
-| M00.F03.I04 | 更新角色（React Native 消费面） | 接口 | 前端+后端 | `tenantRolesUpdateSysRole` 消费；roleName/description 部分载荷装配。测试锚 `tests/tenant-role.test.ts` | 开发中 |
-| M00.F03.I05 | 删除角色（React Native 消费面） | 接口 | 前端+后端 | `tenantRolesDeleteSysRole` 消费；204→undefined + 409 ROLE_IN_USE 分流。测试锚 `tests/tenant-role.test.ts` | 开发中 |
+| M00.F03.I01 | 角色列表（React Native 消费面） | 接口 | 前端+后端 | `tenantRolesListSysRoles` 消费；0 基分页 + 行视图派生 + 无租户上下文 fail-fast。测试锚 `tests/tenant-role.test.ts` | 已上线 |
+| M00.F03.I02 | 创建角色（React Native 消费面） | 接口 | 前端+后端 | `tenantRolesCreateSysRole` 消费；装配 fail-fast（code/name 1-64，clientId 必填）+ 409 分流。测试锚 `tests/tenant-role.test.ts` | 已上线 |
+| M00.F03.I03 | 角色详情（React Native 消费面） | 接口 | 前端+后端 | `tenantRolesGetSysRole` 消费；404 无此角色分流。测试锚 `tests/tenant-role.test.ts` | 已上线 |
+| M00.F03.I04 | 更新角色（React Native 消费面） | 接口 | 前端+后端 | `tenantRolesUpdateSysRole` 消费；roleName/description 部分载荷装配。测试锚 `tests/tenant-role.test.ts` | 已上线 |
+| M00.F03.I05 | 删除角色（React Native 消费面） | 接口 | 前端+后端 | `tenantRolesDeleteSysRole` 消费；204→undefined + 409 ROLE_IN_USE 分流。测试锚 `tests/tenant-role.test.ts` | 已上线 |
 
 ### M00.F04 角色权限
 
@@ -91,9 +91,9 @@
 
 | 子项 ID | 名称 | 类型 | 交付 | 说明 | 状态 |
 |---|---|---|---|---|---|
-| M00.F04.I02 | 角色已授权菜单查询（React Native 消费面） | 接口 | 前端+后端 | `tenantRoleMenusListSysRoleMenus` 消费；UI 勾选回显 grant 形状。测试锚 `tests/tenant-role.test.ts` | 开发中 |
-| M00.F04.I03 | 整批设置角色菜单（React Native 消费面） | 接口 | 前端+后端 | `tenantRoleMenusSetSysRoleMenus` 消费；PUT 全量替换 `{menuIds}` + 回读 grant。测试锚 `tests/tenant-role.test.ts` | 开发中 |
-| M00.F04.I04 | 清空角色菜单（React Native 消费面） | 接口 | 前端+后端 | `tenantRoleMenusClearSysRoleMenus` 消费；DELETE 204→undefined。测试锚 `tests/tenant-role.test.ts` | 开发中 |
+| M00.F04.I02 | 角色已授权菜单查询（React Native 消费面） | 接口 | 前端+后端 | `tenantRoleMenusListSysRoleMenus` 消费；UI 勾选回显 grant 形状。测试锚 `tests/tenant-role.test.ts` | 已上线 |
+| M00.F04.I03 | 整批设置角色菜单（React Native 消费面） | 接口 | 前端+后端 | `tenantRoleMenusSetSysRoleMenus` 消费；PUT 全量替换 `{menuIds}` + 回读 grant。测试锚 `tests/tenant-role.test.ts` | 已上线 |
+| M00.F04.I04 | 清空角色菜单（React Native 消费面） | 接口 | 前端+后端 | `tenantRoleMenusClearSysRoleMenus` 消费；DELETE 204→undefined。测试锚 `tests/tenant-role.test.ts` | 已上线 |
 
 （M00.F04.I01 权限矩阵绑定已废弃，RN 侧不登记消费——shared deprecated-items §1。）
 
@@ -103,10 +103,10 @@
 
 | 子项 ID | 名称 | 类型 | 交付 | 说明 | 状态 |
 |---|---|---|---|---|---|
-| M00.F05.I01 | 列出租户应用（React Native 消费面） | 接口 | 前端+后端 | `tenantApplicationsListTenantApplications` 消费；0 基分页 + 行视图派生 + 无租户上下文 fail-fast。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
-| M00.F05.I02 | 订阅应用（React Native 消费面） | 接口 | 前端+后端 | `tenantApplicationsSubscribeTenantApplication` 消费；装配 fail-fast（clientId 必填）+ 409 分流。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
-| M00.F05.I03 | 更新应用订阅（React Native 消费面） | 接口 | 前端+后端 | `tenantApplicationsUpdateTenantApplication` 消费；status 必填 number + 回读。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
-| M00.F05.I04 | 移除应用订阅（React Native 消费面） | 接口 | 前端+后端 | `tenantApplicationsRemoveTenantApplication` 消费；204→undefined + 404 分流。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
+| M00.F05.I01 | 列出租户应用（React Native 消费面） | 接口 | 前端+后端 | `tenantApplicationsListTenantApplications` 消费；0 基分页 + 行视图派生 + 无租户上下文 fail-fast。测试锚 `tests/tenant-app-menu.test.ts` | 已上线 |
+| M00.F05.I02 | 订阅应用（React Native 消费面） | 接口 | 前端+后端 | `tenantApplicationsSubscribeTenantApplication` 消费；装配 fail-fast（clientId 必填）+ 409 分流。测试锚 `tests/tenant-app-menu.test.ts` | 已上线 |
+| M00.F05.I03 | 更新应用订阅（React Native 消费面） | 接口 | 前端+后端 | `tenantApplicationsUpdateTenantApplication` 消费；status 必填 number + 回读。测试锚 `tests/tenant-app-menu.test.ts` | 已上线 |
+| M00.F05.I04 | 移除应用订阅（React Native 消费面） | 接口 | 前端+后端 | `tenantApplicationsRemoveTenantApplication` 消费；204→undefined + 404 分流。测试锚 `tests/tenant-app-menu.test.ts` | 已上线 |
 
 （I 级子项随各切片实现走 mirror 提案登记——REQ-2026-036 后续切片起逐面补。）
 
@@ -116,9 +116,9 @@
 
 | 功能 ID | 功能名称 | 说明 | 状态 |
 |---|---|---|---|
-| M01.F01 | 我的身份 | 当前会话用户身份查询 | 开发中 |
-| M01.F03 | 我的租户 | 租户成员关系与切换 | 开发中 |
-| M01.F04 | 认证 | 密码登录 / 登出 | 开发中 |
+| M01.F01 | 我的身份 | 当前会话用户身份查询 | 已上线 |
+| M01.F03 | 我的租户 | 租户成员关系与切换 | 已上线 |
+| M01.F04 | 认证 | 密码登录 / 登出 | 已上线 |
 
 ### M01.F01 我的身份
 
@@ -131,14 +131,14 @@
 | 子项 ID | 名称 | 类型 | 交付 | 说明 | 状态 |
 |---|---|---|---|---|---|
 | M01.F03.I01 | 列出我的租户成员关系（React Native 消费面） | 查询 | 前端+后端 | `meListMyTenants` 消费。测试锚 `tests/auth-chain.test.ts`；页面承接=租户列表视图（REQ-2026-036 S-T1），测试锚 `tests/identity-context.test.ts` | 开发中 |
-| M01.F03.I02 | 切换当前租户（React Native 消费面） | 接口 | 前端+后端 | `meSwitchTenant` 消费；更新会话租户上下文。测试锚 `tests/auth-chain.test.ts`；页面承接=列表选中态+切租户入口（REQ-2026-036 S-T1），测试锚 `tests/identity-context.test.ts` | 开发中 |
+| M01.F03.I02 | 切换当前租户（React Native 消费面） | 接口 | 前端+后端 | `meSwitchTenant` 消费；更新会话租户上下文。测试锚 `tests/auth-chain.test.ts`；页面承接=列表选中态+切租户入口（REQ-2026-036 S-T1），测试锚 `tests/identity-context.test.ts` | 已上线 |
 
 ### M01.F04 认证
 
 | 子项 ID | 名称 | 类型 | 交付 | 说明 | 状态 |
 |---|---|---|---|---|---|
-| M01.F04.I01 | 密码登录（React Native 消费面） | 接口 | 前端+后端 | `sessionsLogin` 消费；入参装配校验 fail-fast + 423 Locked 分流。测试锚 `tests/auth-chain.test.ts`、`tests/login-form.test.ts` | 开发中 |
-| M01.F04.I06 | 登出（React Native 消费面） | 接口 | 前端+后端 | `sessionsLogout` 消费；全局登出 + 本地 token/用户/租户全清。测试锚 `tests/auth-chain.test.ts` | 开发中 |
+| M01.F04.I01 | 密码登录（React Native 消费面） | 接口 | 前端+后端 | `sessionsLogin` 消费；入参装配校验 fail-fast + 423 Locked 分流。测试锚 `tests/auth-chain.test.ts`、`tests/login-form.test.ts` | 已上线 |
+| M01.F04.I06 | 登出（React Native 消费面） | 接口 | 前端+后端 | `sessionsLogout` 消费；全局登出 + 本地 token/用户/租户全清。测试锚 `tests/auth-chain.test.ts` | 已上线 |
 
 ---
 
@@ -146,7 +146,7 @@
 
 | 功能 ID | 功能名称 | 说明 | 状态 |
 |---|---|---|---|
-| M04.F04 | 菜单管理 | 菜单 CRUD/结构/当前用户菜单消费面（S-T5 已落地） | 开发中 |
+| M04.F04 | 菜单管理 | 菜单 CRUD/结构/当前用户菜单消费面（S-T5 已落地） | 已上线 |
 
 ### M04.F04 菜单管理
 
@@ -154,13 +154,13 @@
 
 | 子项 ID | 名称 | 类型 | 交付 | 说明 | 状态 |
 |---|---|---|---|---|---|
-| M04.F04.I01 | 菜单列表（React Native 消费面） | 接口 | 前端+后端 | `clientMenusListSysMenus` 消费；数组非分页 + 行视图派生。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
-| M04.F04.I02 | 创建菜单（React Native 消费面） | 接口 | 前端+后端 | `clientMenusCreateSysMenu` 消费；装配 fail-fast（title 1-64/type 三态）+ 409 分流。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
-| M04.F04.I03 | 菜单详情（React Native 消费面） | 接口 | 前端+后端 | `clientMenusGetSysMenu` 消费；404 无此菜单分流。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
-| M04.F04.I04 | 更新菜单（React Native 消费面） | 接口 | 前端+后端 | `clientMenusUpdateSysMenu` 消费；部分载荷装配（不动父子结构）。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
-| M04.F04.I05 | 删除菜单（React Native 消费面） | 接口 | 前端+后端 | `clientMenusDeleteSysMenu` 消费；204→undefined + 409 MENU_HAS_CHILDREN 分流。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
-| M04.F04.I06 | 同级排序（React Native 消费面） | 接口 | 前端+后端 | `clientMenusReorderSysMenus` 消费；PUT `{orderedMenuIds}` + 回读全列表。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
-| M04.F04.I07 | 切换父级（React Native 消费面） | 接口 | 前端+后端 | `clientMenusMoveSysMenu` 消费；PATCH `{parentId}` + 回读菜单。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
+| M04.F04.I01 | 菜单列表（React Native 消费面） | 接口 | 前端+后端 | `clientMenusListSysMenus` 消费；数组非分页 + 行视图派生。测试锚 `tests/tenant-app-menu.test.ts` | 已上线 |
+| M04.F04.I02 | 创建菜单（React Native 消费面） | 接口 | 前端+后端 | `clientMenusCreateSysMenu` 消费；装配 fail-fast（title 1-64/type 三态）+ 409 分流。测试锚 `tests/tenant-app-menu.test.ts` | 已上线 |
+| M04.F04.I03 | 菜单详情（React Native 消费面） | 接口 | 前端+后端 | `clientMenusGetSysMenu` 消费；404 无此菜单分流。测试锚 `tests/tenant-app-menu.test.ts` | 已上线 |
+| M04.F04.I04 | 更新菜单（React Native 消费面） | 接口 | 前端+后端 | `clientMenusUpdateSysMenu` 消费；部分载荷装配（不动父子结构）。测试锚 `tests/tenant-app-menu.test.ts` | 已上线 |
+| M04.F04.I05 | 删除菜单（React Native 消费面） | 接口 | 前端+后端 | `clientMenusDeleteSysMenu` 消费；204→undefined + 409 MENU_HAS_CHILDREN 分流。测试锚 `tests/tenant-app-menu.test.ts` | 已上线 |
+| M04.F04.I06 | 同级排序（React Native 消费面） | 接口 | 前端+后端 | `clientMenusReorderSysMenus` 消费；PUT `{orderedMenuIds}` + 回读全列表。测试锚 `tests/tenant-app-menu.test.ts` | 已上线 |
+| M04.F04.I07 | 切换父级（React Native 消费面） | 接口 | 前端+后端 | `clientMenusMoveSysMenu` 消费；PATCH `{parentId}` + 回读菜单。测试锚 `tests/tenant-app-menu.test.ts` | 已上线 |
 | M04.F04.I08 | 当前用户有效菜单（React Native 消费面） | 查询 | 前端+后端 | `meGetMyMenus` 消费；按 clientId 键记录 + 标题拍平渲染。测试锚 `tests/tenant-app-menu.test.ts` | 开发中 |
 
 ---
